@@ -1,13 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-class DataClass {
-  final String name;
-  final String url;
-  final String continent;
-
-  DataClass({required this.name, required this.url, required this.continent});
-}
+import 'package:travel_app/DestinationSummary.dart';
+import 'package:travel_app/models/DataClass.dart';
+import 'package:travel_app/models/Sink.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -19,17 +14,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   String? selectedContinent;
   int? touchedIndex;
-  List<DataClass> items = [
-    DataClass(
-        name: "Barcelona", url: "images/barcelona.png", continent: "Europe"),
-    DataClass(
-        name: "Amsterdam", url: "images/amsterdam.png", continent: "Europe"),
-    DataClass(name: "Bali", url: "images/bali.png", continent: "Indonesia"),
-    DataClass(name: "Dubai", url: "images/daubai.png", continent: "UAE"),
-    DataClass(
-        name: "New York", url: "images/new_york.png", continent: "America"),
-    DataClass(name: "Palma", url: "images/palma.png", continent: "America"),
-  ];
 
   List<DataClass> filteredItems = [];
   Set<String> uniqueContinents = Set();
@@ -62,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
           IconButton(
             icon: const CircleAvatar(
               backgroundImage:
-              AssetImage('images/User@1x.png'), // Check the image path
+                  AssetImage('images/User@1x.png'), // Check the image path
             ),
             onPressed: () {
               // Add your action here
@@ -91,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 50,
               child: ListView.builder(
                 itemCount:
-                uniqueContinents.length + 1, // Add 1 for "All" filter
+                    uniqueContinents.length + 1, // Add 1 for "All" filter
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (_, int index) {
                   if (index == 0) {
@@ -117,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       color: Colors.white,
                                       fontFamily: "Poppins",
                                       fontWeight: FontWeight.w600,
-                                      fontSize: 17)))),
+                                      fontSize: 15)))),
                     );
                   } else {
                     String continent = uniqueContinents.elementAt(index - 1);
@@ -146,7 +130,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     color: Colors.white,
                                     fontFamily: "Poppins",
                                     fontWeight: FontWeight.w600,
-                                    fontSize: 17))),
+                                    fontSize: 15))),
                       ),
                     );
                   }
@@ -164,7 +148,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: const EdgeInsets.only(right: 20),
                     child: GestureDetector(
                       onTap: () {
-                        print(items[index].name);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => DestinationSummary(
+                              name: filteredItems[index].name,
+                              headerImage: filteredItems[index].headerImage,
+                              location: filteredItems[index].continent,
+                              infoText: filteredItems[index].infoText,
+                            ),
+                          ),
+                        );
                       },
                       onTapDown: (_) {
                         setState(() {
@@ -185,10 +179,14 @@ class _HomeScreenState extends State<HomeScreen> {
                               borderRadius: BorderRadius.circular(20),
                               child: Image.asset(filteredItems[index].url),
                             ),
-                            const SizedBox(height: 10), // Add space between image and text
+                            const SizedBox(
+                                height: 10), // Add space between image and text
                             Row(
                               children: [
-                                Icon(Icons.location_on_outlined,color: Colors.grey,),
+                                Icon(
+                                  Icons.location_on_outlined,
+                                  color: Colors.grey,
+                                ),
                                 const SizedBox(width: 8),
                                 Text(
                                   filteredItems[index].name,
@@ -209,10 +207,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
               ),
             ),
-            const Text("What would you like?", textAlign: TextAlign.start, style: TextStyle(fontFamily: "Poppins", fontWeight: FontWeight.w600, color: Colors.black, fontSize: 25))
+            const Text("What would you like?",
+                textAlign: TextAlign.start,
+                style: TextStyle(
+                    fontFamily: "Poppins",
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black,
+                    fontSize: 25))
           ],
         ),
       ),
-      );
+    );
   }
 }
