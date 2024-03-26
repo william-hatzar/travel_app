@@ -81,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     fontFamily: "Poppins",
                     fontSize: 30,
                     fontWeight: FontWeight.w600)),
-            const Text("experience",
+            const Text("next holiday",
                 style: TextStyle(
                     fontFamily: "Poppins",
                     fontSize: 30,
@@ -188,11 +188,12 @@ class _HomeScreenState extends State<HomeScreen> {
                             const SizedBox(height: 10), // Add space between image and text
                             Row(
                               children: [
-                                Icon(Icons.location_on_outlined),
+                                Icon(Icons.location_on_outlined,color: Colors.grey,),
                                 const SizedBox(width: 8),
                                 Text(
                                   filteredItems[index].name,
                                   style: const TextStyle(
+                                    color: Colors.grey,
                                     fontFamily: "Poppins",
                                     fontSize: 15,
                                     fontWeight: FontWeight.w400,
