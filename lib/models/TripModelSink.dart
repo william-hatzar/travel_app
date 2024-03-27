@@ -1,55 +1,70 @@
-import 'package:travel_app/models/DataClass.dart';
+import 'package:travel_app/models/TripModel.dart';
 
-List<DataClass> items = [
-  DataClass(
+List<TripModel> items = [
+  TripModel(
       name: "Barcelona",
       url: "images/barcelona.png",
-      continent: "Europe",
+      country: "Spain",
       headerImage:
           "https://www.telegraph.co.uk/content/dam/Travel/Destinations/Europe/Spain/Barcelona/barcelona-parc-guell-cityscape.jpg",
-      infoText: barcelonInfoText),
-  DataClass(
+      infoText: barcelonInfoText,
+      rating: 5),
+  TripModel(
       name: "Amsterdam",
       url: "images/amsterdam.png",
-      continent: "Europe",
+      country: "Netherlands",
       headerImage:
           "https://i0.wp.com/wheelchairtravel.org/wp-content/uploads/2020/01/amsterdam-guide-v2020-header.jpg?fit=2500%2C1333&ssl=1",
-      infoText: amsterdamInfoTex),
-  DataClass(
+      infoText: amsterdamInfoTex,
+      rating: 3),
+  TripModel(
       name: "Bali",
       url: "images/bali.png",
-      continent: "Indonesia",
+      country: "Indonesia",
       headerImage:
           "https://www.telegraph.co.uk/content/dam/Travel/Destinations/Europe/Spain/Majorca/palma-GettyImages-1083456786.jpg",
-      infoText: baliInfoText),
-  DataClass(
+      infoText: baliInfoText,
+      rating: 4),
+  TripModel(
       name: "Dubai",
       url: "images/daubai.png",
-      continent: "UAE",
+      country: "UAE",
       headerImage:
           "https://wise.com/imaginary-v2/a1aff2ea163604c7be42140235af0772.jpg?width=1200",
-      infoText: dubaiInfoText),
-  DataClass(
+      infoText: dubaiInfoText,
+      rating: 3),
+  TripModel(
       name: "New York",
       url: "images/new_york.png",
-      continent: "America",
+      country: "America",
       headerImage:
           "https://www.explore.com/img/gallery/23-places-in-new-york-where-youll-likely-spot-celebrities-upgrade/l-intro-1696442735.jpg",
-      infoText: newYorkInfoText),
-  DataClass(
+      infoText: newYorkInfoText,
+      rating: 3),
+  TripModel(
       name: "Palma",
       url: "images/palma.png",
-      continent: "Majorca",
+      country: "Majorca",
       headerImage:
           "https://a.cdn-hotels.com/gdcs/production136/d1368/25474ff5-3aee-43d9-9e45-fb366433af68.jpg?impolicy=fcrop&w=800&h=533&q=medium",
-      infoText: palmaInfoText),
-  DataClass(
+      infoText: palmaInfoText,
+      rating: 3),
+  TripModel(
       name: "London",
       url: "images/london.png",
-      continent: "Europe",
+      country: "England",
       headerImage:
           "https://a.cdn-hotels.com/gdcs/production153/d1371/e6c1f55e-51ac-41d5-8c63-2d0c63faf59e.jpg",
-      infoText: londonInfoText),
+      infoText: londonInfoText,
+      rating: 4),
+  TripModel(
+      name: "Berlin",
+      url: "images/berlin.png",
+      country: "Germany",
+      headerImage:
+      "https://wheelchairtravel.org/wp-content/uploads/2020/01/berlin-v2020-header.jpg",
+      infoText: berlinInfoText,
+      rating: 5),
 ];
 
 String barcelonInfoText =
@@ -66,3 +81,5 @@ String palmaInfoText =
     "Discover the allure of Palma, Mallorca's lively capital! Navigate the maze-like streets of the historic Old Town, where medieval meets modern. Marvel at the grandeur of La Seu Cathedral and explore bustling Plaça Major markets. Relax on Playa de Palma's golden shores or roam the gardens of Bellver Castle for city and sea views. Immerse yourself in culture at museums and theaters, and indulge in local cuisine from tapas to Mediterranean fare. Palma seamlessly blends past and present, ready for your exploration.";
 String londonInfoText =
     "Explore London's vibrant blend of history and innovation! Visit iconic landmarks like Buckingham Palace and the Tower of London. Wander through Covent Garden's lively streets filled with shops and entertainment. Experience the cultural diversity of Notting Hill and Camden. Enjoy a scenic walk along the River Thames. With its rich heritage and dynamic arts scene, London promises endless adventure.";
+String berlinInfoText =
+    "Experience Berlin's dynamic blend of history and modernity! Explore remnants of the Berlin Wall and vibrant street art scenes in Kreuzberg and Friedrichshain. Visit iconic landmarks like the Brandenburg Gate and Reichstag, then savor diverse culinary delights. Berlin offers a captivating mix of culture and creativity, waiting to be explored.";

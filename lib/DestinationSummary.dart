@@ -2,14 +2,50 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:travel_app/models/TripModelSink.dart';
 
-class DestinationSummary extends StatelessWidget {
+class DestinationSummary extends StatefulWidget {
   final String name;
   final String headerImage;
   final String location;
   final String infoText;
-  const DestinationSummary({Key? key, required this.name, required this.headerImage, required this.location, required this.infoText}) : super(key: key);
+  final int rating;
 
+  const DestinationSummary({super.key, required this.name, required this.headerImage, required this.location, required this.infoText, required this.rating});
+
+  @override
+  State<DestinationSummary> createState() => _DestinationSummaryState();
+}
+
+class _DestinationSummaryState extends State<DestinationSummary> {
+
+  Widget returnStars(int filledStars, int totalStars) {
+    var notStars = 5 - filledStars;
+    List<Widget> stars = [];
+
+    for (int i = 0; i < filledStars; i++) {
+      stars.add(
+        Icon(
+          Icons.star,
+          size: 24,
+          color: Color(0xff63D1D9),
+        ),
+      );
+    }
+
+    for (int i = 0; i < totalStars - filledStars; i++) {
+      stars.add(
+        Icon(
+          Icons.star_border,
+          size: 24,
+          color: Color(0xff63D1D9),
+        ),
+      );
+    }
+    return Row(
+      children: stars,
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +56,7 @@ class DestinationSummary extends StatelessWidget {
             left: 0,
             right: 0,
             child: Image.network(
-              headerImage,
+              widget.headerImage,
               width: MediaQuery.of(context).size.width,
               fit: BoxFit.fitWidth,
             ),
@@ -46,7 +82,7 @@ class DestinationSummary extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          name,
+                          widget.name,
                           style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 25, color: Colors.black, fontFamily: "Poppins"),
                         ),
                         const Text(
@@ -63,20 +99,15 @@ class DestinationSummary extends StatelessWidget {
                         Icon(Icons.location_on, color: const Color(0xff63D1D9)),
                         const SizedBox(width: 5),
                         Text(
-                          location,
+                          widget.location,
                           style: const TextStyle(fontWeight: FontWeight.w200, fontSize: 15, color: Color(0xff63D1D9), fontFamily: "Poppins"),
                         ),
                       ],
                     ),
                     const SizedBox(height: 10),
-                    const Row(
+                    Row(
                       children: [
-                        Icon(Icons.star),
-                        Icon(Icons.star),
-                        Icon(Icons.star),
-                        Icon(Icons.star),
-                        Icon(Icons.star_border),
-                        Text("(4)", style: TextStyle(color: Colors.black, fontWeight: FontWeight.w200))
+                        returnStars(widget.rating, 5)
                       ],
                     ),
                     const SizedBox(height: 20),
@@ -86,7 +117,7 @@ class DestinationSummary extends StatelessWidget {
                     ),
                     const SizedBox(height: 15),
                     Text(
-                      infoText,
+                      widget.infoText,
                       textAlign: TextAlign.start,
                       style: const TextStyle(fontWeight: FontWeight.w200, fontSize: 15, color: Colors.grey, fontFamily: "Poppins"),
                     ),
@@ -100,8 +131,8 @@ class DestinationSummary extends StatelessWidget {
                           color: const Color(0xff63D1D9)
                         ),
                         child: const Padding(
-                          padding: EdgeInsets.only(top: 15),
-                          child:  Text("Book your experience", textAlign: TextAlign.center, style: TextStyle(fontSize: 15, color: Colors.white, fontFamily: "Poppins", fontWeight: FontWeight.w600)),
+                          padding: EdgeInsets.only(top: 10),
+                          child:  Text("Book your experience", textAlign: TextAlign.center, style: TextStyle(fontSize: 20, color: Colors.white, fontFamily: "Poppins", fontWeight: FontWeight.w600)),
                         ),
                       ),
                     )
