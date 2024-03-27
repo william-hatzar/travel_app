@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:travel_app/DestinationSummary.dart';
+import 'package:travel_app/FlightSummary.dart';
 import 'package:travel_app/models/FlightsModel.dart';
 import 'package:travel_app/models/TripModel.dart';
 import 'package:travel_app/models/TripModelSink.dart';
@@ -74,8 +75,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     fontFamily: "Poppins",
                     fontSize: 30,
                     fontWeight: FontWeight.w600)),
-            const SizedBox(height: 10),
-            const Text("Your trips",
+            const SizedBox(height: 5),
+            const Text("Your flights",
                 style: TextStyle(
                     fontFamily: "Poppins",
                     fontSize: 20,
@@ -89,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 itemBuilder: (_, int index) {
                   return GestureDetector(
                     onTap: () {
-                      print(flightItems[index].airLine);
+                      Navigator.push(context, MaterialPageRoute(builder: (_) => FlightSummary(airline: flightItems[index].airLine, destination: flightItems[index].destination, departure: flightItems[index].departure,)));
                     },
                     child: Padding(
                       padding: const EdgeInsets.only(right: 20),
@@ -174,7 +175,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
               ),
             ),
-            SizedBox(height: 40),
+            SizedBox(height: 8),
             const Text("Explore Places",
                 style: TextStyle(
                     fontFamily: "Poppins",
@@ -358,6 +359,22 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ],
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Search',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.chat),
+            label: 'Chats',
+          ),
+        ],
       ),
     );
   }

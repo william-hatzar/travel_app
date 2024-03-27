@@ -1,8 +1,5 @@
-import 'dart:ui';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:travel_app/models/TripModelSink.dart';
+import 'package:travel_app/utils/ratings_builder.dart';
 
 class DestinationSummary extends StatefulWidget {
   final String name;
@@ -19,33 +16,7 @@ class DestinationSummary extends StatefulWidget {
 
 class _DestinationSummaryState extends State<DestinationSummary> {
 
-  Widget returnStars(int filledStars, int totalStars) {
-    var notStars = 5 - filledStars;
-    List<Widget> stars = [];
 
-    for (int i = 0; i < filledStars; i++) {
-      stars.add(
-        Icon(
-          Icons.star,
-          size: 24,
-          color: Color(0xff63D1D9),
-        ),
-      );
-    }
-
-    for (int i = 0; i < totalStars - filledStars; i++) {
-      stars.add(
-        Icon(
-          Icons.star_border,
-          size: 24,
-          color: Color(0xff63D1D9),
-        ),
-      );
-    }
-    return Row(
-      children: stars,
-    );
-  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,9 +38,9 @@ class _DestinationSummaryState extends State<DestinationSummary> {
             right: 0,
             child: Container(
               height: MediaQuery.of(context).size.height,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white,
-                borderRadius: const BorderRadius.only(topRight: Radius.circular(40), topLeft: Radius.circular(40)),
+                borderRadius: BorderRadius.only(topRight: Radius.circular(40), topLeft: Radius.circular(40)),
               ),
               padding: const EdgeInsets.all(16.0),
               child: Padding(
@@ -96,7 +67,7 @@ class _DestinationSummaryState extends State<DestinationSummary> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Icon(Icons.location_on, color: const Color(0xff63D1D9)),
+                        const Icon(Icons.location_on, color: const Color(0xff63D1D9)),
                         const SizedBox(width: 5),
                         Text(
                           widget.location,
@@ -113,7 +84,7 @@ class _DestinationSummaryState extends State<DestinationSummary> {
                     const SizedBox(height: 20),
                     const Text(
                       "Description",
-                      style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 20, color: Colors.black, fontFamily: "Poppins"),
+                      style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20, color: Colors.black, fontFamily: "Poppins"),
                     ),
                     const SizedBox(height: 15),
                     Text(
@@ -121,18 +92,18 @@ class _DestinationSummaryState extends State<DestinationSummary> {
                       textAlign: TextAlign.start,
                       style: const TextStyle(fontWeight: FontWeight.w200, fontSize: 15, color: Colors.grey, fontFamily: "Poppins"),
                     ),
-                    SizedBox(height: 70),
+                    const SizedBox(height: 70),
                     Center(
                       child: Container(
                         height: 50,
-                        width: 250,
+                        width: 200,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
                           color: const Color(0xff63D1D9)
                         ),
                         child: const Padding(
-                          padding: EdgeInsets.only(top: 10),
-                          child:  Text("Book your experience", textAlign: TextAlign.center, style: TextStyle(fontSize: 20, color: Colors.white, fontFamily: "Poppins", fontWeight: FontWeight.w600)),
+                          padding: EdgeInsets.only(top: 13),
+                          child:  Text("Book now", textAlign: TextAlign.center, style: TextStyle(fontSize: 17, color: Colors.white, fontFamily: "Poppins", fontWeight: FontWeight.w600)),
                         ),
                       ),
                     )
