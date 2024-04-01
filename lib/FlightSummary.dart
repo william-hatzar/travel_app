@@ -1,12 +1,36 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter/painting.dart';
+import 'package:travel_app/widgets/progressbar.dart';
+import 'models/FlightsModel.dart';
+import 'widgets/buildFlightInfo.dart';
 
 class FlightSummary extends StatefulWidget {
-  final String airline;
   final String departure;
   final String destination;
+  final String startCountry;
+  final String endCountry;
+  final String departureTime;
+  final String arrivalTime;
+  final double earlyPercentage;
+  final double onTimePercentage;
+  final double latePercentage;
+  final double canceledPercentage;
 
-  const FlightSummary({super.key, required this.airline, required this.departure, required this.destination});
+
+
+  const FlightSummary(
+      {super.key,
+      required this.departure,
+      required this.destination,
+      required this.startCountry,
+      required this.endCountry,
+      required this.arrivalTime,
+      required this.departureTime,
+      required this.earlyPercentage,
+      required this.onTimePercentage,
+      required this.latePercentage,
+      required this.canceledPercentage});
 
   @override
   State<FlightSummary> createState() => _FlightSummaryState();
@@ -16,55 +40,186 @@ class _FlightSummaryState extends State<FlightSummary> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff002059),
-      body: Stack(
-        children: [
-          Positioned(
-            top: 20,
-            left: 0,
-            right: 0,
-            child: Image.network(
-              "https://tellmamauk.org/wp-content/uploads/2018/10/RyanAir-2.jpg",
-              width: MediaQuery.of(context).size.width,
-              fit: BoxFit.fitWidth, // Adjust the BoxFit as per your preference
-            ),
-          ),
-          Positioned(
-            top: 240,
-            left: 0,
-            right: 0,
-            child: Container(
-              height: MediaQuery.of(context).size.height,
-              padding: const EdgeInsets.all(16.0),
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(topRight: Radius.circular(40), topLeft: Radius.circular(40)),
-              ),
-              child: Padding(
-                padding: EdgeInsets.all(16),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "${widget.departure} -> ${widget.destination}",
-                          style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 25, color: Colors.black, fontFamily: "Poppins"),
-                        ),
-                         Text(
-                          widget.airline,
-                          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 25, color: Color(0xff63D1D9), fontFamily: "Poppins"),
-                        ),
-                      ],
-                    ),
-                  ],
+      backgroundColor: Color(0xFFD3F6D6),
+      appBar: AppBar(
+        backgroundColor: Color(0xFFD3F6D6),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
+        ),
+        title: const Text(
+          "Flight Details",
+          style: TextStyle(fontFamily: "Poppins", fontWeight: FontWeight.w400),
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: ListView(children: [
+          const Row(
+            children: [
+              Text(
+                "From",
+                style: TextStyle(
+                  fontFamily: "Poppins",
+                  fontSize: 16,
+                  color: Colors.blueGrey,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
+              Spacer(),
+              Text(
+                "To",
+                style: TextStyle(
+                  fontFamily: "Poppins",
+                  fontSize: 16,
+                  color: Colors.blueGrey,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 5),
+          Row(
+            children: [
+              Text(
+                widget.departure,
+                style: TextStyle(
+                  fontFamily: "Poppins",
+                  fontSize: 22,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              Spacer(),
+              Text(
+                widget.destination,
+                style: TextStyle(
+                  fontFamily: "Poppins",
+                  fontSize: 22,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 5),
+          Row(
+            children: [
+              Text(
+                widget.startCountry,
+                style: TextStyle(
+                  fontFamily: "Poppins",
+                  fontSize: 18,
+                  color: Colors.black,
+                ),
+              ),
+              Spacer(),
+              Text(
+                widget.endCountry,
+                style: TextStyle(
+                  fontFamily: "Poppins",
+                  fontSize: 18,
+                  color: Colors.black,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 20),
+          Container(
+            height: 350,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Color(0xFFBCE6BF),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Where's My Plane?",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w600,
+                      fontFamily: "Poppins",
+                      fontSize: 30,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    "Your flight's arrivals & departure timings",
+                    style: TextStyle(
+                      color: Colors.blueGrey,
+                      fontWeight: FontWeight.w400,
+                      fontFamily: "Poppins",
+                      fontSize: 16,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  buildFlightInfo(
+                    icon: Icons.flight_takeoff,
+                    city: widget.startCountry,
+                    status: "Departure time",
+                    time: widget.departureTime,
+                  ),
+                  const SizedBox(height: 10),
+                  buildFlightInfo(
+                    icon: Icons.flight_land,
+                    city: widget.endCountry,
+                    status: "Arrival time",
+                    time: widget.arrivalTime,
+                  ),
+                ],
+              ),
             ),
           ),
-        ],
+          const SizedBox(height: 30),
+          Container(
+              height: 350,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Color(0xFFBCE6BF),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      "Arrival time?",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w600,
+                        fontFamily: "Poppins",
+                        fontSize: 30,
+                      ),
+                    ),
+                   const SizedBox(height: 5),
+                    const Text(
+                      "Your flight's arrivals & departure timings",
+                      style: TextStyle(
+                        color: Colors.blueGrey,
+                        fontWeight: FontWeight.w400,
+                        fontFamily: "Poppins",
+                        fontSize: 16,
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    ProgressBar(title: "Early", percentage: widget.earlyPercentage),
+                    const SizedBox(height: 10),
+                    ProgressBar(title: "On time", percentage: widget.onTimePercentage),
+                    const SizedBox(height: 10),
+                    ProgressBar(title: "Late", percentage: widget.latePercentage),
+                    const SizedBox(height: 10),
+                    ProgressBar(title: "Cancelled ", percentage: widget.canceledPercentage),
+                  ],
+                ),
+              ))
+        ]),
       ),
     );
   }
