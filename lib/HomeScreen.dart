@@ -80,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
             FlightsListViewBuilder(flightItems: flightItems),
             const SizedBox(height: 8),
             SubheadingWidget(title: explorePlaces),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             CountryFilterButtons(
               uniqueCountries: uniqueCountries,
               filteredItems: filteredItems,

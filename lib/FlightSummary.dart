@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:travel_app/widgets/progressbar.dart';
-import 'models/FlightsModel.dart';
-import 'widgets/buildFlightInfo.dart';
+import 'package:travel_app/widgets/ArrivalTimeWidget.dart';
+import 'package:travel_app/widgets/FlightTopRowWidget.dart';
+import 'package:travel_app/widgets/WheresMyPlaneWidget.dart';
 
 class FlightSummary extends StatefulWidget {
   final String departure;
@@ -57,168 +57,15 @@ class _FlightSummaryState extends State<FlightSummary> {
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: ListView(children: [
-          const Row(
-            children: [
-              Text(
-                "From",
-                style: TextStyle(
-                  fontFamily: "Poppins",
-                  fontSize: 16,
-                  color: Colors.blueGrey,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              Spacer(),
-              Text(
-                "To",
-                style: TextStyle(
-                  fontFamily: "Poppins",
-                  fontSize: 16,
-                  color: Colors.blueGrey,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ],
-          ),
+          const FlightRowTopWidget(text1: "From", text2: "To", fontSize: 16, textColor: Colors.blueGrey, fontWeight: FontWeight.w600),
           const SizedBox(height: 5),
-          Row(
-            children: [
-              Text(
-                widget.departure,
-                style: TextStyle(
-                  fontFamily: "Poppins",
-                  fontSize: 22,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              Spacer(),
-              Text(
-                widget.destination,
-                style: TextStyle(
-                  fontFamily: "Poppins",
-                  fontSize: 22,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ],
-          ),
+          FlightRowTopWidget(text1: widget.departure, text2: widget.destination, fontSize: 22, textColor: Colors.black, fontWeight: FontWeight.w600),
           const SizedBox(height: 5),
-          Row(
-            children: [
-              Text(
-                widget.startCountry,
-                style: TextStyle(
-                  fontFamily: "Poppins",
-                  fontSize: 18,
-                  color: Colors.black,
-                ),
-              ),
-              Spacer(),
-              Text(
-                widget.endCountry,
-                style: TextStyle(
-                  fontFamily: "Poppins",
-                  fontSize: 18,
-                  color: Colors.black,
-                ),
-              ),
-            ],
-          ),
+          FlightRowTopWidget(text1: widget.startCountry, text2: widget.endCountry, fontSize: 18, textColor: Colors.black),
           const SizedBox(height: 20),
-          Container(
-            height: 350,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: Color(0xFFBCE6BF),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Where's My Plane?",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w600,
-                      fontFamily: "Poppins",
-                      fontSize: 30,
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  Text(
-                    "Your flight's arrivals & departure timings",
-                    style: TextStyle(
-                      color: Colors.blueGrey,
-                      fontWeight: FontWeight.w400,
-                      fontFamily: "Poppins",
-                      fontSize: 16,
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  buildFlightInfo(
-                    icon: Icons.flight_takeoff,
-                    city: widget.startCountry,
-                    status: "Departure time",
-                    time: widget.departureTime,
-                  ),
-                  const SizedBox(height: 10),
-                  buildFlightInfo(
-                    icon: Icons.flight_land,
-                    city: widget.endCountry,
-                    status: "Arrival time",
-                    time: widget.arrivalTime,
-                  ),
-                ],
-              ),
-            ),
-          ),
+          WheresMyPlaneWidget(startCountry: widget.startCountry, endCountry: widget.endCountry, arrivalTime: widget.arrivalTime, departureTime: widget.departureTime),
           const SizedBox(height: 30),
-          Container(
-              height: 350,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Color(0xFFBCE6BF),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      "Arrival time?",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w600,
-                        fontFamily: "Poppins",
-                        fontSize: 30,
-                      ),
-                    ),
-                   const SizedBox(height: 5),
-                    const Text(
-                      "Your flight's arrivals & departure timings",
-                      style: TextStyle(
-                        color: Colors.blueGrey,
-                        fontWeight: FontWeight.w400,
-                        fontFamily: "Poppins",
-                        fontSize: 16,
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    ProgressBar(title: "Early", percentage: widget.earlyPercentage),
-                    const SizedBox(height: 10),
-                    ProgressBar(title: "On time", percentage: widget.onTimePercentage),
-                    const SizedBox(height: 10),
-                    ProgressBar(title: "Late", percentage: widget.latePercentage),
-                    const SizedBox(height: 10),
-                    ProgressBar(title: "Cancelled ", percentage: widget.canceledPercentage),
-                  ],
-                ),
-              ))
+          ArrivalTimeWidget(earlyPercentage: widget.earlyPercentage, onTimePercentage: widget.onTimePercentage, latePercentage: widget.latePercentage, canceledPercentage: widget.canceledPercentage)
         ]),
       ),
     );

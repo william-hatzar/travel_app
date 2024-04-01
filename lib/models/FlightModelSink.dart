@@ -11,7 +11,7 @@ List<FlightModel> flights = [
       arrivalTime: "4:00 pm",
       price: "1200",
       imageUrl: "images/ryanAir.png",
-      color: Colors.white60,
+      color: const Color(0xff09337D),
       headerImage:
           "https://i.pinimg.com/originals/36/3d/bf/363dbf0ffa49288be404eb9beffa7264.jpg",
       startCountry: 'Dubai',
