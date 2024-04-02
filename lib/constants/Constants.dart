@@ -4,3 +4,6 @@ String dashboard = "Dashboard";
 String yourFlights = "Your Flights";
 String explorePlaces = "Explore Places";
 String flightDetails = "Flight details";
+String from = "From";
+String to = "To";
+String fontFamily = "Poppins";

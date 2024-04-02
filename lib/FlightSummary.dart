@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:travel_app/constants/Constants.dart';
 import 'package:travel_app/widgets/ArrivalTimeWidget.dart';
 import 'package:travel_app/widgets/FlightTopRowWidget.dart';
@@ -50,16 +48,16 @@ class _FlightSummaryState extends State<FlightSummary> {
         ),
         title: Text(
           flightDetails,
-          style: const TextStyle(
-              fontFamily: "Poppins", fontWeight: FontWeight.w400),
+          style: TextStyle(
+              fontFamily: fontFamily, fontWeight: FontWeight.w400),
         ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: ListView(children: [
-          const FlightRowTopWidget(
-              text1: "From",
-              text2: "To",
+           FlightRowTopWidget(
+              text1: from,
+              text2: to,
               fontSize: 16,
               textColor: Colors.blueGrey,
               fontWeight: FontWeight.w600),

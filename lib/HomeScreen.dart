@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:travel_app/constants/Constants.dart';
 import 'package:travel_app/models/FlightsModel.dart';
 import 'package:travel_app/models/TripModel.dart';
