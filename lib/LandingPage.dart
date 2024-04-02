@@ -17,9 +17,7 @@ class _LandingPageState extends State<LandingPage> {
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.only(left: 30),
-          child: LandingPageTopContent()
-        ),
+            padding: EdgeInsets.only(left: 30), child: LandingPageTopContent()),
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:travel_app/constants/Constants.dart';
 import 'package:travel_app/widgets/ArrivalTimeWidget.dart';
 import 'package:travel_app/widgets/FlightTopRowWidget.dart';
 import 'package:travel_app/widgets/WheresMyPlaneWidget.dart';
@@ -16,8 +17,6 @@ class FlightSummary extends StatefulWidget {
   final double onTimePercentage;
   final double latePercentage;
   final double canceledPercentage;
-
-
 
   const FlightSummary(
       {super.key,
@@ -49,23 +48,46 @@ class _FlightSummaryState extends State<FlightSummary> {
           },
           icon: const Icon(Icons.arrow_back, color: Colors.black),
         ),
-        title: const Text(
-          "Flight Details",
-          style: TextStyle(fontFamily: "Poppins", fontWeight: FontWeight.w400),
+        title: Text(
+          flightDetails,
+          style: const TextStyle(
+              fontFamily: "Poppins", fontWeight: FontWeight.w400),
         ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: ListView(children: [
-          const FlightRowTopWidget(text1: "From", text2: "To", fontSize: 16, textColor: Colors.blueGrey, fontWeight: FontWeight.w600),
+          const FlightRowTopWidget(
+              text1: "From",
+              text2: "To",
+              fontSize: 16,
+              textColor: Colors.blueGrey,
+              fontWeight: FontWeight.w600),
           const SizedBox(height: 5),
-          FlightRowTopWidget(text1: widget.departure, text2: widget.destination, fontSize: 22, textColor: Colors.black, fontWeight: FontWeight.w600),
+          FlightRowTopWidget(
+              text1: widget.departure,
+              text2: widget.destination,
+              fontSize: 22,
+              textColor: Colors.black,
+              fontWeight: FontWeight.w600),
           const SizedBox(height: 5),
-          FlightRowTopWidget(text1: widget.startCountry, text2: widget.endCountry, fontSize: 18, textColor: Colors.black),
+          FlightRowTopWidget(
+              text1: widget.startCountry,
+              text2: widget.endCountry,
+              fontSize: 18,
+              textColor: Colors.black),
           const SizedBox(height: 20),
-          WheresMyPlaneWidget(startCountry: widget.startCountry, endCountry: widget.endCountry, arrivalTime: widget.arrivalTime, departureTime: widget.departureTime),
+          WheresMyPlaneWidget(
+              startCountry: widget.startCountry,
+              endCountry: widget.endCountry,
+              arrivalTime: widget.arrivalTime,
+              departureTime: widget.departureTime),
           const SizedBox(height: 30),
-          ArrivalTimeWidget(earlyPercentage: widget.earlyPercentage, onTimePercentage: widget.onTimePercentage, latePercentage: widget.latePercentage, canceledPercentage: widget.canceledPercentage)
+          ArrivalTimeWidget(
+              earlyPercentage: widget.earlyPercentage,
+              onTimePercentage: widget.onTimePercentage,
+              latePercentage: widget.latePercentage,
+              canceledPercentage: widget.canceledPercentage)
         ]),
       ),
     );

@@ -43,65 +43,62 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: Builder(
-          builder: (BuildContext context) {
-            return IconButton(
-              icon: Image.asset(
-                  hamburgerAsset), // Check the image path
-              onPressed: () {
-                Scaffold.of(context).openDrawer();
-              },
-            );
-          },
-        ),
-        actions: [
-          IconButton(
-            icon: CircleAvatar(
-              backgroundImage:
-                  AssetImage(userAsset), // Check the image path
-            ),
-            onPressed: () {
-              // Add your action here
+        appBar: AppBar(
+          leading: Builder(
+            builder: (BuildContext context) {
+              return IconButton(
+                icon: Image.asset(hamburgerAsset), // Check the image path
+                onPressed: () {
+                  Scaffold.of(context).openDrawer();
+                },
+              );
             },
           ),
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(18.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TitleWidget(title: dashboard),
-            const SizedBox(height: 5),
-            SubheadingWidget(title: yourFlights),
-            const SizedBox(height: 15),
-            FlightsListViewBuilder(flightItems: flightItems),
-            const SizedBox(height: 8),
-            SubheadingWidget(title: explorePlaces),
-            const SizedBox(height: 20),
-            CountryFilterButtons(
-              uniqueCountries: uniqueCountries,
-              filteredItems: filteredItems,
-              updateFilteredItems: (List<TripModel> items) {
-                setState(() {
-                  filteredItems = items;
-                });
-              },
-              selectedCountry: selectedCountry,
-              updateSelectedCountry: (String? country) {
-                setState(() {
-                  selectedCountry = country;
-                });
+          actions: [
+            IconButton(
+              icon: CircleAvatar(
+                backgroundImage: AssetImage(userAsset), // Check the image path
+              ),
+              onPressed: () {
+                // Add your action here
               },
             ),
-            const SizedBox(height: 20),
-            CountryListViewBuilder(filteredItems: filteredItems)
           ],
         ),
-      ),
-      bottomNavigationBar: bottomNavBar()
-    );
+        body: Padding(
+          padding: const EdgeInsets.all(18.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TitleWidget(title: dashboard),
+              const SizedBox(height: 5),
+              SubheadingWidget(title: yourFlights),
+              const SizedBox(height: 15),
+              FlightsListViewBuilder(flightItems: flightItems),
+              const SizedBox(height: 8),
+              SubheadingWidget(title: explorePlaces),
+              const SizedBox(height: 20),
+              CountryFilterButtons(
+                uniqueCountries: uniqueCountries,
+                filteredItems: filteredItems,
+                updateFilteredItems: (List<TripModel> items) {
+                  setState(() {
+                    filteredItems = items;
+                  });
+                },
+                selectedCountry: selectedCountry,
+                updateSelectedCountry: (String? country) {
+                  setState(() {
+                    selectedCountry = country;
+                  });
+                },
+              ),
+              const SizedBox(height: 20),
+              CountryListViewBuilder(filteredItems: filteredItems)
+            ],
+          ),
+        ),
+        bottomNavigationBar: bottomNavBar());
   }
 }
